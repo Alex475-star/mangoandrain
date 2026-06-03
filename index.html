@@ -29,6 +29,11 @@
       overflow-x: hidden;
     }
 
+    /* Subtle global sunset/rain tint on cream sections */
+    .hero, .story, .journey, .vs-section {
+      position: relative;
+    }
+
     .hero-logo-img {
       width: clamp(240px, 80vw, 420px);
       height: auto;
@@ -87,7 +92,14 @@
 
     .vs-section {
       padding: 0 8vw 80px;
-      background: var(--cream);
+      background: linear-gradient(to right,
+        rgba(244,100,0,0.12) 0%,
+        rgba(232,97,42,0.06) 20%,
+        rgba(253,246,236,1) 45%,
+        rgba(253,246,236,1) 60%,
+        rgba(74,127,165,0.06) 85%,
+        rgba(44,95,122,0.12) 100%
+      );
     }
 
     .vs-section .story-image {
@@ -281,6 +293,14 @@
       gap: 48px;
       align-items: center;
       position: relative;
+      background: linear-gradient(to right,
+        rgba(244,100,0,0.12) 0%,
+        rgba(232,97,42,0.06) 20%,
+        rgba(253,246,236,1) 45%,
+        rgba(253,246,236,1) 60%,
+        rgba(74,127,165,0.06) 85%,
+        rgba(44,95,122,0.12) 100%
+      );
     }
 
     .story::after {
@@ -469,6 +489,14 @@
     .journey {
       padding: 100px 8vw;
       position: relative;
+      background: linear-gradient(to right,
+        rgba(244,100,0,0.12) 0%,
+        rgba(232,97,42,0.06) 20%,
+        rgba(253,246,236,1) 45%,
+        rgba(253,246,236,1) 60%,
+        rgba(74,127,165,0.06) 85%,
+        rgba(44,95,122,0.12) 100%
+      );
     }
 
     .journey-header {
