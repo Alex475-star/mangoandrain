@@ -1117,14 +1117,38 @@
     reveals.forEach(el => observer.observe(el));
 
     // Signup
-    function handleSignup(btn) {
+    async function handleSignup(btn) {
       const input = btn.previousElementSibling;
-      if (input.value && input.value.includes('@')) {
-        btn.textContent = '✓ Done!';
-        btn.style.background = '#2D5E3A';
-        input.value = '';
-        input.placeholder = 'You\'re on the list!';
-      } else {
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        input.style.outline = '2px solid #E8612A';
+        setTimeout(() => input.style.outline = 'none', 1500);
+        return;
+      }
+      btn.textContent = 'Saving...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('https://meqxdophunauekslrlcz.supabase.co/rest/v1/mango_rain_subscribers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1lcXhkb3BodW5hdWVrc2xybGN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNzIxMTgsImV4cCI6MjA5Mjg0ODExOH0.Mrcy4rR4AFJr85nRkmieFw589ujtxbeuJAuRJyMvlRw',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1lcXhkb3BodW5hdWVrc2xybGN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNzIxMTgsImV4cCI6MjA5Mjg0ODExOH0.Mrcy4rR4AFJr85nRkmieFw589ujtxbeuJAuRJyMvlRw',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ email: email, source: 'website' })
+        });
+        if (res.ok || res.status === 409) {
+          btn.textContent = '✓ You\'re on the list!';
+          btn.style.background = '#2D5E3A';
+          input.value = '';
+          input.placeholder = 'You\'re on the list!';
+        } else {
+          throw new Error('Failed');
+        }
+      } catch(e) {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
         input.style.outline = '2px solid #E8612A';
         setTimeout(() => input.style.outline = 'none', 1500);
       }
