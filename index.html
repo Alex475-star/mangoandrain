@@ -462,40 +462,97 @@
 
     .topics-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 2px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
       position: relative;
       z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .topic-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      padding: 40px 32px;
-      transition: background 0.3s, transform 0.3s;
+      position: relative;
+      background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 18px;
+      padding: 38px 30px 34px;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s, box-shadow 0.4s;
       cursor: default;
+      overflow: hidden;
+    }
+
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--mango), var(--mango-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .topic-card::after {
+      content: '';
+      position: absolute;
+      top: -40%; right: -40%;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(244,137,10,0.18) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
     }
 
     .topic-card:hover {
-      background: rgba(244,137,10,0.1);
-      transform: translateY(-4px);
+      transform: translateY(-8px);
+      border-color: rgba(244,137,10,0.4);
+      box-shadow: 0 20px 50px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(244,137,10,0.1);
     }
 
-    .topic-icon { font-size: 2.2rem; margin-bottom: 20px; }
+    .topic-card:hover::before { transform: scaleX(1); }
+    .topic-card:hover::after { opacity: 1; }
+
+    .topic-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px; height: 60px;
+      font-size: 1.9rem;
+      margin-bottom: 22px;
+      border-radius: 14px;
+      background: linear-gradient(150deg, rgba(244,137,10,0.18), rgba(232,97,42,0.08));
+      border: 1px solid rgba(244,137,10,0.18);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .topic-card:hover .topic-icon {
+      transform: scale(1.08) rotate(-4deg);
+    }
 
     .topic-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
+      font-size: 1.35rem;
+      font-weight: 700;
       color: white;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      letter-spacing: 0.2px;
     }
 
     .topic-desc {
       font-family: 'Lato', sans-serif;
       font-weight: 300;
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.5);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.62);
+    }
+
+    @media (max-width: 900px) {
+      .topics-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    }
+
+    @media (max-width: 600px) {
+      .topics-grid { grid-template-columns: 1fr; gap: 16px; }
+      .topic-card { padding: 32px 26px 28px; }
     }
 
     /* ── JOURNEY TIMELINE ── */
