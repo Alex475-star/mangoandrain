@@ -1214,7 +1214,10 @@
         setTimeout(() => input.style.outline = 'none', 1500);
         return;
       }
-      window.location.href = 'mailto:hello@mangoandrain.com?subject=Notify%20Me%20-%20Mango%20%26%20Rain&body=Please%20add%20me%20to%20your%20list%3A%20' + encodeURIComponent(email);
+      var u = ['he','llo'].join('');
+      var d = ['mangoandrain','com'].join('.');
+      var to = u + String.fromCharCode(64) + d;
+      window.location.href = 'mai' + 'lto:' + to + '?subject=Notify%20Me%20-%20Mango%20%26%20Rain&body=Please%20add%20me%20to%20your%20list%3A%20' + encodeURIComponent(email);
       btn.textContent = '✓ Done!';
       btn.style.background = '#2D5E3A';
       input.value = '';
